@@ -10,10 +10,10 @@ def Encryption(text):
     
     cipher = AES.new(key, AES.MODE_CBC, IV)
     ciphertext = cipher.encrypt(pad(text,AES.block_size))
-    return base64.b64encode(ciphertext).decode()
+    return base64.urlsafe_b64encode(ciphertext).decode()
 #ciphertext
-decodedKey = base64.b64encode(key).decode()
-decodedIV = base64.b64encode(IV).decode()
+decodedKey = base64.urlsafe_b64encode(key).decode()
+decodedIV = base64.urlsafe_b64encode(IV).decode()
 # original = "cyka-blyat asd asdafdsa casdfasdfac casdcasd"
 # text= original.encode()
 # print("original: ",original)
@@ -28,6 +28,6 @@ if __name__ == "__main__":
     # Read arguments passed from PHP
     input_text = sys.argv[1]
 
-    print(Encryption(input_text))
+    print(Encryption(input_text.encode()))
     print("Key: ", decodedKey)
     print("IV: ", decodedIV)
