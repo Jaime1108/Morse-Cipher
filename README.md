@@ -28,7 +28,7 @@ This project is built with **PHP (backend)**, **Python (encryption & translation
 ## 🛠️ **Installation & Setup**  
 
 ### 📌 **Requirements**  
-- A **web server** (Apache, Nginx, XAMPP, etc.)  
+- A **web server** (XAMPP)  
 - **PHP** installed  
 - **Python** (for encryption & translation scripts)  
 - **AES encryption dependencies** (Python `cryptography` library)  
