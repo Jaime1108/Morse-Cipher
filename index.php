@@ -55,15 +55,13 @@
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            
-            
             display: flex;
             gap: 20px;
         }
         .tabs {
             display: flex;
             flex-wrap: wrap;
-            max-width: 500px;
+            max-width: 700px;
             font-family: sans-serif;
         }
         .tab__label {
@@ -112,6 +110,24 @@
                 <button type="submit">Translate</button>
             </form>
             <p><strong>Translation:</strong> <span id="textResult"></span></p>
+        </div>
+        <input type="radio" class="tab__radio" name="tab" id="Encryption">
+        <label for="Encryption" class="tab__label">Text Encryption</label>
+        <div class="tab__content">
+            <form id="TextEncryptionForm">
+                <textarea class="input-text" type="text" id="TextEncryption" class="entered-text" placeholder="Enter your text encrypt"></textarea>
+                <button type="submit">Encrypt</button>
+            </form>
+            <p><strong>Encrypted Text:</strong> <span id="textResult"></span></p>
+        </div>
+        <input type="radio" class="tab__radio" name="tab" id="Decryption">
+        <label for="Decryption" class="tab__label">Text Decryption</label>
+        <div class="tab__content">
+            <form id="TextDecryptionForm">
+                <textarea class="input-text" type="text" id="TextDecryption" class="entered-text" placeholder="Enter Encrypted text"></textarea>
+                <button type="submit">Decrypt</button>
+            </form>
+            <p><strong>Decrypted Message: </strong> <span id="textResult"></span></p>
         </div>
     </div>
     </div>

@@ -10,6 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $command = "python3 morse_translator.py text_to_morse $text_input";
     } elseif ($action === 'morse_to_text') {
         $command = "python3 morse_translator.py morse_to_text $text_input";
+    } elseif ($action === 'Encryption') {
+        $command = "python3 Encryption.py $text_input";
+    } elseif ($action === 'Decryption') {
+        $command = "python3 Decryption.py $text_input";
     } else {
         echo "Invalid action.";
         exit;
