@@ -1,4 +1,4 @@
-# 🔠 Morse Cipher
+# 🔠 Morse & Cipher
 
 A **Morse Code Translator & Encryption Tool** that allows users to:  
 ✅ Convert text to Morse code and vice versa  
