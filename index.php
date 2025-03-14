@@ -111,6 +111,7 @@
             </form>
             <p><strong>Translation:</strong> <span id="textResult"></span></p>
         </div>
+
         <input type="radio" class="tab__radio" name="tab" id="Encryption">
         <label for="Encryption" class="tab__label">Text Encryption</label>
         <div class="tab__content">
@@ -118,16 +119,19 @@
                 <textarea class="input-text" type="text" id="TextEncryption" class="entered-text" placeholder="Enter your text encrypt"></textarea>
                 <button type="submit">Encrypt</button>
             </form>
-            <p><strong>Encrypted Text:</strong> <span id="textResult"></span></p>
+            <p><strong>Encrypted Text:</strong> <span id="encryptResult"></span></p>
         </div>
+
         <input type="radio" class="tab__radio" name="tab" id="Decryption">
         <label for="Decryption" class="tab__label">Text Decryption</label>
         <div class="tab__content">
             <form id="TextDecryptionForm">
                 <textarea class="input-text" type="text" id="TextDecryption" class="entered-text" placeholder="Enter Encrypted text"></textarea>
+                <input type="text" id="DecryptKey" placeholder="Enter the key" class="entered-text">
+                <input type="text" id="DecryptIV" placeholder="Enter the IV" class="entered-text">
                 <button type="submit">Decrypt</button>
             </form>
-            <p><strong>Decrypted Message: </strong> <span id="textResult"></span></p>
+            <p><strong>Decrypted Message: </strong> <span id="decryptResult"></span></p>
         </div>
     </div>
     </div>
@@ -145,12 +149,29 @@
         translate("morse_to_text", input);
     });
 
-    function translate(action, input) {
+    document.getElementById("TextEncryptionForm").addEventListener("submit", function (event){
+        event.preventDefault();
+        const input = document.getElementById("TextEncryption").value;
+        translate("text_encryption",input);
+    });
+    document.getElementById("TextDecryptionForm").addEventListener("submit", function(event){
+        event.preventDefault();
+        const input = document.getElementById("TextDecryption").value;
+        const key = document.getElementById("DecryptKey").value;
+        const IV = document.getElementById("DecryptIV").value;
+        translate("text_decryption",input, key, IV);
+    });
+
+    function translate(action, input, key="", IV="") {
         // Clear previous results
         if (action === "text_to_morse") {
             document.getElementById("morseResult").innerText = "Translating...";
         } else if (action === "morse_to_text") {
             document.getElementById("textResult").innerText = "Translating...";
+        } else if (action === "text_encryption") {
+            document.getElementById("encryptResult").innerText = "Encrypting...";
+        } else if (action === "text_decryption") {
+            document.getElementById("decryptResult").innerText = "Decrypting text...";
         }
 
         // Create AJAX request
@@ -164,12 +185,20 @@
                     document.getElementById("morseResult").innerText = xhr.responseText;
                 } else if (action === "morse_to_text") {
                     document.getElementById("textResult").innerText = xhr.responseText;
+                } else if (action === "text_encryption") {
+                    document.getElementById("encryptResult").innerText = xhr.responseText;
+                } else {
+                    document.getElementById("decryptResult").innerText = xhr.responseText;
                 }
             }
         };
 
         // Send the request with the action and input value
+        if (action === "text_decryption"){
+            xhr.send(`action=${action}&text_input=${encodeURIComponent(input)}&key=${encodeURIComponent(key)}&IV=${encodeURIComponent(IV)}`)
+        } else {
         xhr.send(`action=${action}&text_input=${encodeURIComponent(input)}`);
+        }
     }
 </script>
 <footer>
