@@ -10,10 +10,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $command = "python3 morse_translator.py text_to_morse $text_input";
     } elseif ($action === 'morse_to_text') {
         $command = "python3 morse_translator.py morse_to_text $text_input";
-    } elseif ($action === 'Encryption') {
+    } elseif ($action === 'text_encryption') {
         $command = "python3 Encryption.py $text_input";
-    } elseif ($action === 'Decryption') {
-        $command = "python3 Decryption.py $text_input";
+    } elseif ($action === 'text_decryption') {
+        if(!isset($_POST['key'])|| !isset($_POST['IV'])){
+            echo "Invalid Key or IV";
+            exit;
+        } else{
+            $key = escapeshellarg($_POST['key']);
+            $IV = escapeshellarg($_POST['IV']);
+            $command = "python3 Decryption.py $text_input $key $IV";}
+        
     } else {
         echo "Invalid action.";
         exit;
